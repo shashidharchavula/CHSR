@@ -22,11 +22,12 @@ const SpaceXDashboard = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState(null)
 
-  const twitchClientId = import.meta.env.VITE_TWITCH_CLIENT_ID
-  const twitchAccessToken = import.meta.env.VITE_TWITCH_ACCESS_TOKEN
-  const steamApiKey = import.meta.env.VITE_STEAM_API_KEY
-  const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY
-  const steamAppIds = ["570", "730", "440"] // Dota2, CS:GO, Team Fortress
+  const twitchClientId = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID
+  const twitchAccessToken = process.env.NEXT_PUBLIC_TWITCH_ACCESS_TOKEN
+  const steamApiKey = process.env.NEXT_PUBLIC_STEAM_API_KEY
+  const youtubeApiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
+
+  const steamAppIds = ["570", "730", "440"] // Dota 2, CS:GO, TF2
 
   const fetchTwitchData = async () => {
     const res = await fetch("https://api.twitch.tv/helix/streams?first=100", {
