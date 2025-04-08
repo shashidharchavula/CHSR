@@ -22,10 +22,11 @@ const SpaceXDashboard = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState(null)
 
-  const twitchClientId = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID
-  const twitchAccessToken = process.env.NEXT_PUBLIC_TWITCH_ACCESS_TOKEN
-  const steamApiKey = process.env.NEXT_PUBLIC_STEAM_API_KEY
-  const youtubeApiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
+  // 🔐 Hardcoded credentials (TEMPORARY ONLY)
+  const twitchClientId = "ngj0amo6a911ukzsm4vgason0axtwa"
+  const twitchAccessToken = "71itbbaohxoxfx8bh3pek82xi3lemk"
+  const steamApiKey = "1DE690EDB3C0A719B05CCD7761CA5B9C"
+  const youtubeApiKey = "AIzaSyDO2WJJI8Ex7mjTylA2QmP51pKOdUHQ25M"
 
   const steamAppIds = ["570", "730", "440"] // Dota 2, CS:GO, TF2
 
@@ -76,6 +77,10 @@ const SpaceXDashboard = () => {
     )
 
     const json = await res.json()
+
+    if (!json?.items || !Array.isArray(json.items)) {
+      throw new Error("YouTube data could not be loaded")
+    }
 
     return json.items
       .filter((video) => video.liveStreamingDetails?.concurrentViewers)
