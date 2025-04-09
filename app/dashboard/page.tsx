@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowRightIcon, DatabaseIcon, ActivityIcon, RocketIcon } from "lucide-react"
+import { ArrowRightIcon, DatabaseIcon, ActivityIcon, Gamepad2, RocketIcon } from "lucide-react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PipelineSimulator from "@/components/pipeline-simulator"
@@ -77,8 +77,8 @@ export default function DashboardPage() {
                 value="spacex"
                 className="data-[state=active]:bg-orange-500 data-[state=active]:text-white rounded-full"
               >
-                <RocketIcon className="h-4 w-4 mr-2" />
-                SpaceX Live
+                <Gamepad2 className="h-4 w-4 mr-2" />
+                Esports Live 
               </TabsTrigger>
               <TabsTrigger
                 value="pipeline"

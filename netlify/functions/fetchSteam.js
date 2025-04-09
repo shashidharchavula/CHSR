@@ -4,11 +4,14 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 exports.handler = async () => {
   const steamApiKey = "1DE690EDB3C0A719B05CCD7761CA5B9C"
-  const appIds = ["570", "730", "440"]
+  const appIds = ["570", "730", "440", "578080", "271590", "1172470"]
   const games = {
     "570": "Dota 2",
     "730": "CS:GO",
     "440": "TF2",
+    "578080": "PUBG",
+    "271590": "GTA V",
+    "1172470": "Apex Legends"
   }
 
   try {
