@@ -22,74 +22,25 @@ const SpaceXDashboard = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState(null)
 
-  // 🔐 Hardcoded credentials (TEMPORARY ONLY)
-  const twitchClientId = "ngj0amo6a911ukzsm4vgason0axtwa"
-  const twitchAccessToken = "71itbbaohxoxfx8bh3pek82xi3lemk"
-  const steamApiKey = "1DE690EDB3C0A719B05CCD7761CA5B9C"
-  const youtubeApiKey = "AIzaSyDO2WJJI8Ex7mjTylA2QmP51pKOdUHQ25M"
-
-  const steamAppIds = ["570", "730", "440"] // Dota 2, CS:GO, TF2
-
   const fetchTwitchData = async () => {
-    const res = await fetch("https://api.twitch.tv/helix/streams?first=100", {
-      headers: {
-        "Client-ID": twitchClientId,
-        Authorization: `Bearer ${twitchAccessToken}`,
-      },
-    })
-
+    const res = await fetch("/.netlify/functions/fetchTwitch")
     const json = await res.json()
-    const gameStats = json.data.reduce((acc, { game_name, viewer_count }) => {
-      acc[game_name] = (acc[game_name] || 0) + viewer_count
-      return acc
-    }, {})
-
-    return Object.entries(gameStats)
-      .map(([name, viewers]) => ({ name, viewers }))
-      .sort((a, b) => b.viewers - a.viewers)
-      .slice(0, 5)
+    if (!Array.isArray(json)) throw new Error("Invalid Twitch response")
+    return json
   }
 
   const fetchSteamData = async () => {
-    const responses = await Promise.all(
-      steamAppIds.map((appid) =>
-        fetch(
-          `https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${steamApiKey}&appid=${appid}`
-        ).then((res) => res.json())
-      )
-    )
-
-    const games = {
-      "570": "Dota 2",
-      "730": "CS:GO",
-      "440": "TF2",
-    }
-
-    return steamAppIds.map((appid, index) => ({
-      name: games[appid],
-      viewers: responses[index]?.response?.player_count || 0,
-    }))
+    const res = await fetch("/.netlify/functions/fetchSteam")
+    const json = await res.json()
+    if (!Array.isArray(json)) throw new Error("Invalid Steam response")
+    return json
   }
 
   const fetchYouTubeData = async () => {
-    const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&chart=mostPopular&videoCategoryId=20&maxResults=10&regionCode=US&key=${youtubeApiKey}`
-    )
-
+    const res = await fetch("/.netlify/functions/fetchYouTube")
     const json = await res.json()
-
-    if (!json?.items || !Array.isArray(json.items)) {
-      throw new Error("YouTube data could not be loaded")
-    }
-
-    return json.items
-      .filter((video) => video.liveStreamingDetails?.concurrentViewers)
-      .map((video) => ({
-        name: video.snippet.title,
-        viewers: Number(video.liveStreamingDetails.concurrentViewers),
-      }))
-      .sort((a, b) => b.viewers - a.viewers)
-      .slice(0, 5)
+    if (!Array.isArray(json)) throw new Error("Invalid YouTube response")
+    return json
   }
 
   const refreshData = async () => {
@@ -105,6 +56,7 @@ const SpaceXDashboard = () => {
       setSteamData(steam)
       setYoutubeData(youtube)
     } catch (err) {
+      console.error("Fetch Error:", err)
       setError(err.message || "Something went wrong.")
     } finally {
       setLoading(false)
@@ -132,6 +84,7 @@ const SpaceXDashboard = () => {
         </Card>
       )}
 
+      {/* Twitch Chart */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Twitch Top Games</CardTitle>
@@ -143,12 +96,13 @@ const SpaceXDashboard = () => {
               <YAxis />
               <Tooltip />
               <CartesianGrid strokeDasharray="3 3" />
-              <Bar dataKey="viewers" fill="#9146FF" />
+              <Bar dataKey="viewers" fill="#A970FF" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
+      {/* Steam Chart */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg font-semibold">Steam Player Counts</CardTitle>
@@ -160,12 +114,13 @@ const SpaceXDashboard = () => {
               <YAxis />
               <Tooltip />
               <CartesianGrid strokeDasharray="3 3" />
-              <Bar dataKey="viewers" fill="#0f0f0f" />
+              <Bar dataKey="viewers" fill="#0F0F0F" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
 
+      {/* YouTube Chart */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg font-semibold">YouTube Gaming Live Streams</CardTitle>
@@ -183,6 +138,7 @@ const SpaceXDashboard = () => {
         </CardContent>
       </Card>
 
+      {/* Refresh Button */}
       <div className="flex justify-center">
         <Button
           onClick={refreshData}
