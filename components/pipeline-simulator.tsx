@@ -1,7 +1,5 @@
 "use client"
 
-export const dynamic = "force-dynamic"
-
 import { useEffect, useState } from "react"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -22,7 +20,7 @@ import {
 import dynamic from "next/dynamic"
 
 // Lazy load map only on client
-const FlightMap = dynamic(() => import("@/components/FlightMap").then(mod => mod.default), { ssr: false })
+const FlightMap = dynamic(() => import("@/components/FlightMap"), { ssr: false })
 
 const COLORS = ["#f97316", "#10b981", "#3b82f6", "#f43f5e", "#8b5cf6", "#22c55e", "#eab308"]
 

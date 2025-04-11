@@ -1,10 +1,4 @@
-const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args))
-const { createClient } = require("@supabase/supabase-js")
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
-)
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 exports.handler = async () => {
   try {
@@ -13,22 +7,16 @@ exports.handler = async () => {
 
     const flights = (data.states || [])
       .filter((state) => state[5] !== null && state[6] !== null && state[9] !== null)
-      .slice(0, 20) // log only 20 to avoid spam
+      .slice(0, 50)
       .map((state) => ({
         callsign: state[1]?.trim() || "Unknown",
-        origin_country: state[2],
+        originCountry: state[2],
         longitude: state[5],
         latitude: state[6],
         altitude: state[7],
         velocity: state[9],
-        heading: state[10] || 0,
+        heading: state[10] || 0 // 🔥 Add heading for rotation
       }))
-
-    // Push to Supabase
-    const { error } = await supabase.from("flights").insert(flights)
-    if (error) {
-      console.error("❌ Supabase Insert Error:", error)
-    }
 
     return {
       statusCode: 200,
