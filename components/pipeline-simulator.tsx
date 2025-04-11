@@ -1,311 +1,201 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+import { useEffect, useState } from "react"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { PlayIcon, PauseIcon, RefreshCwIcon, InfoIcon } from "lucide-react"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { RefreshCwIcon } from "lucide-react"
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+} from "recharts"
+import dynamic from "next/dynamic"
 
-type DataPacket = {
-  id: number
-  status: "source" | "transform" | "load" | "complete"
-  x: number
-  y: number
-  color: string
-}
+// Lazy load map only on client
+const FlightMap = dynamic(() => import("@/components/FlightMap"), { ssr: false })
 
-const PipelineSimulator = () => {
-  const [isRunning, setIsRunning] = useState(false)
-  const [packets, setPackets] = useState<DataPacket[]>([])
-  const [packetCount, setPacketCount] = useState(0)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationFrameRef = useRef<number>(0)
-  const packetsRef = useRef<DataPacket[]>([]) // Ref to hold the latest packets
+const COLORS = ["#f97316", "#10b981", "#3b82f6", "#f43f5e", "#8b5cf6", "#22c55e", "#eab308"]
 
-  // Define the pipeline stages and their positions
-  const stages = {
-    source: { x: 100, y: 100, width: 120, height: 60, label: "Data Sources" },
-    transform: { x: 350, y: 100, width: 120, height: 60, label: "Transform" },
-    load: { x: 600, y: 100, width: 120, height: 60, label: "Load" },
+const FlightDashboard = () => {
+  const [flightData, setFlightData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [refreshing, setRefreshing] = useState(false)
+  const [error, setError] = useState(null)
+
+  const fetchFlightData = async () => {
+    try {
+      setRefreshing(true)
+      const res = await fetch("/.netlify/functions/fetchFlights")
+      const json = await res.json()
+      if (!Array.isArray(json)) throw new Error("Invalid flight data format")
+      setFlightData(json)
+    } catch (err) {
+      console.error("Flight Fetch Error:", err)
+      setError("Could not load flight data.")
+    } finally {
+      setLoading(false)
+      setRefreshing(false)
+    }
   }
 
-  // Lines connecting the stages
-  const connections = [
-    { from: "source", to: "transform" },
-    { from: "transform", to: "load" },
-  ]
-
-  // Create a new data packet at random intervals
   useEffect(() => {
-    if (!isRunning) return
+    fetchFlightData()
+  }, [])
 
-    const interval = setInterval(() => {
-      if (packets.length < 25) {
-        const newPacket: DataPacket = {
-          id: packetCount,
-          status: "source",
-          x: stages.source.x + stages.source.width / 2,
-          y: stages.source.y + stages.source.height / 2,
-          color: `hsl(${Math.floor(Math.random() * 30) + 20}, 90%, 60%)`, // Orange-ish hues
-        }
+  const topSpeedData = [...flightData]
+    .sort((a, b) => b.velocity - a.velocity)
+    .slice(0, 5)
+    .map((f) => ({
+      name: f.callsign || "Unknown",
+      speed: +(f.velocity * 3.6).toFixed(0), // m/s to km/h
+    }))
 
-        setPackets((prev) => [...prev, newPacket])
-        setPacketCount((prev) => prev + 1)
-      }
-    }, 500)
+  const topAltitudeData = [...flightData]
+    .sort((a, b) => b.altitude - a.altitude)
+    .slice(0, 5)
+    .map((f) => ({
+      name: f.callsign || "Unknown",
+      altitude: Math.round(f.altitude),
+    }))
 
-    return () => clearInterval(interval)
-  }, [isRunning, packets.length, packetCount])
+  const countryMap = {}
+  flightData.forEach((f) => {
+    const country = f.originCountry || "Unknown"
+    countryMap[country] = (countryMap[country] || 0) + 1
+  })
 
-  // Move packets through the pipeline
-  useEffect(() => {
-    if (!isRunning || !canvasRef.current) return
+  const countryData = Object.entries(countryMap)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 6)
 
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    packetsRef.current = packets // Update the ref with the latest packets
-
-    // Store animation frame ID for cleanup
-    let animationFrameId = 0
-
-    const drawPipeline = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      // Draw connections (lines between stages)
-      ctx.strokeStyle = "#e2e8f0"
-      ctx.lineWidth = 3
-
-      connections.forEach((conn) => {
-        const fromStage = stages[conn.from]
-        const toStage = stages[conn.to]
-
-        ctx.beginPath()
-        ctx.moveTo(fromStage.x + fromStage.width, fromStage.y + fromStage.height / 2)
-        ctx.lineTo(toStage.x, toStage.y + toStage.height / 2)
-        ctx.stroke()
-
-        // Draw arrow
-        ctx.fillStyle = "#e2e8f0"
-        ctx.beginPath()
-        ctx.moveTo(toStage.x - 10, toStage.y + toStage.height / 2 - 5)
-        ctx.lineTo(toStage.x, toStage.y + toStage.height / 2)
-        ctx.lineTo(toStage.x - 10, toStage.y + toStage.height / 2 + 5)
-        ctx.fill()
-      })
-
-      // Draw stages (boxes)
-      Object.entries(stages).forEach(([key, stage]) => {
-        // Create gradient for boxes
-        const gradient = ctx.createLinearGradient(stage.x, stage.y, stage.x + stage.width, stage.y + stage.height)
-        gradient.addColorStop(0, "#f97316")
-        gradient.addColorStop(1, "#ea580c")
-
-        ctx.fillStyle = gradient
-        ctx.strokeStyle = "#c2410c"
-        ctx.lineWidth = 2
-
-        // Draw rounded rectangle
-        ctx.beginPath()
-        const radius = 8
-        ctx.moveTo(stage.x + radius, stage.y)
-        ctx.lineTo(stage.x + stage.width - radius, stage.y)
-        ctx.quadraticCurveTo(stage.x + stage.width, stage.y, stage.x + stage.width, stage.y + radius)
-        ctx.lineTo(stage.x + stage.width, stage.y + stage.height - radius)
-        ctx.quadraticCurveTo(
-          stage.x + stage.width,
-          stage.y + stage.height,
-          stage.x + stage.width - radius,
-          stage.y + stage.height,
-        )
-        ctx.lineTo(stage.x + radius, stage.y + stage.height)
-        ctx.quadraticCurveTo(stage.x, stage.y + stage.height, stage.x, stage.y + stage.height - radius)
-        ctx.lineTo(stage.x, stage.y + radius)
-        ctx.quadraticCurveTo(stage.x, stage.y, stage.x + radius, stage.y)
-        ctx.closePath()
-        ctx.fill()
-        ctx.stroke()
-
-        // Add text shadow for better readability
-        ctx.fillStyle = "rgba(0, 0, 0, 0.2)"
-        ctx.font = "bold 14px 'Poppins', sans-serif"
-        ctx.textAlign = "center"
-        ctx.textBaseline = "middle"
-        ctx.fillText(stage.label, stage.x + stage.width / 2 + 1, stage.y + stage.height / 2 + 1)
-
-        // Draw text
-        ctx.fillStyle = "white"
-        ctx.fillText(stage.label, stage.x + stage.width / 2, stage.y + stage.height / 2)
-      })
-
-      // Update packet positions and draw them
-      const updatedPackets = packetsRef.current
-        .map((packet) => {
-          let { status, x, y } = packet
-
-          // Move packet based on its current status
-          if (status === "source") {
-            if (x < stages.transform.x - 15) {
-              x += 3
-            } else {
-              status = "transform"
-            }
-          } else if (status === "transform") {
-            if (x < stages.load.x - 15) {
-              x += 3
-            } else {
-              status = "load"
-            }
-          } else if (status === "load") {
-            if (x < stages.load.x + stages.load.width + 50) {
-              x += 3
-            } else {
-              status = "complete"
-            }
-          }
-
-          return { ...packet, status, x, y }
-        })
-        .filter((packet) => packet.status !== "complete")
-
-      // Draw each packet with glow effect
-      updatedPackets.forEach((packet) => {
-        // Draw glow
-        const glow = ctx.createRadialGradient(packet.x, packet.y, 0, packet.x, packet.y, 12)
-        glow.addColorStop(0, packet.color)
-        glow.addColorStop(1, "rgba(255, 255, 255, 0)")
-        ctx.fillStyle = glow
-        ctx.beginPath()
-        ctx.arc(packet.x, packet.y, 12, 0, Math.PI * 2)
-        ctx.fill()
-
-        // Draw packet
-        ctx.fillStyle = packet.color
-        ctx.beginPath()
-        ctx.arc(packet.x, packet.y, 6, 0, Math.PI * 2)
-        ctx.fill()
-
-        // Add highlight
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)"
-        ctx.beginPath()
-        ctx.arc(packet.x - 2, packet.y - 2, 2, 0, Math.PI * 2)
-        ctx.fill()
-      })
-
-      // Only update state if packets have actually changed
-      if (JSON.stringify(updatedPackets) !== JSON.stringify(packetsRef.current)) {
-        // Use a timeout to avoid updating state during render
-        setTimeout(() => {
-          setPackets(updatedPackets)
-        }, 0)
-      }
-
-      animationFrameId = requestAnimationFrame(drawPipeline)
-    }
-
-    animationFrameId = requestAnimationFrame(drawPipeline)
-
-    return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId)
-      }
-    }
-  }, [isRunning]) // Only depend on isRunning, not packets
-
-  const toggleSimulation = () => {
-    setIsRunning((prev) => !prev)
-  }
-
-  const resetSimulation = () => {
-    setIsRunning(false)
-    setPackets([])
-    setPacketCount(0)
-
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext("2d")
-      if (ctx) {
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-      }
-    }
-  }
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-orange-500 border-b-2 mb-4"></div>
+        <p className="text-sm ml-4">Loading Flight Pipeline...</p>
+      </div>
+    )
 
   return (
-    <Card className="overflow-hidden border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
-      <CardHeader className="border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 pb-3">
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-lg font-medium text-gray-800 dark:text-white font-poppins flex items-center">
-            ETL Pipeline Visualization
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="ml-2 h-6 w-6">
-                    <InfoIcon className="h-4 w-4 text-gray-500" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="max-w-xs">
-                    This visualization demonstrates data flowing through an ETL pipeline from source systems through
-                    transformation to the data warehouse.
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </CardTitle>
-          <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={toggleSimulation}
-              className="flex items-center gap-1 rounded-full h-8"
-            >
-              {isRunning ? (
-                <>
-                  <PauseIcon className="h-4 w-4" /> Pause
-                </>
-              ) : (
-                <>
-                  <PlayIcon className="h-4 w-4" /> Start
-                </>
-              )}
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={resetSimulation}
-              className="flex items-center gap-1 rounded-full h-8"
-            >
-              <RefreshCwIcon className="h-4 w-4" /> Reset
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="p-0">
-        <div className="bg-white dark:bg-gray-900 relative">
-          <canvas ref={canvasRef} width={800} height={200} className="w-full h-full" />
+    <div className="space-y-10">
+      {error && (
+        <Card className="p-4 border-red-500 bg-red-50 text-red-700">
+          <p>{error}</p>
+        </Card>
+      )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700">
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-              <h3 className="text-sm font-medium text-gray-800 dark:text-white mb-2 font-poppins">Data Extraction</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">Sources: Database, API, Streaming, Files</p>
-            </div>
+      {/* Map Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">🌍 Live Flight Density Map</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <FlightMap flights={flightData} />
+        </CardContent>
+      </Card>
 
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-              <h3 className="text-sm font-medium text-gray-800 dark:text-white mb-2 font-poppins">
-                Data Transformation
-              </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">Cleaning, Enrichment, Aggregation, Filtering</p>
+      {/* Flight Log Panel */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">🛫 Live Flight Logs</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2 max-h-80 overflow-y-auto text-sm">
+          {flightData.slice(0, 10).map((f, idx) => (
+            <div key={idx} className="border-b pb-2 mb-2">
+              ✈️ <strong>{f.callsign || "Unknown"}</strong>  
+              from <span className="text-orange-600">{f.originCountry}</span><br />
+              Speed: {(f.velocity * 3.6).toFixed(0)} km/h | Alt: {Math.round(f.altitude)} m
             </div>
+          ))}
+        </CardContent>
+      </Card>
 
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-              <h3 className="text-sm font-medium text-gray-800 dark:text-white mb-2 font-poppins">Data Loading</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">Data Warehouse, Data Lake, Analytical Storage</p>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      {/* Top Speeds */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">🚀 Top 5 Fastest Flights (km/h)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={topSpeedData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar dataKey="speed" fill="#f97316" />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+
+      {/* Highest Altitudes */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">🛫 Top 5 Highest Altitude Flights (m)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={topAltitudeData}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar dataKey="altitude" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+
+      {/* Country Distribution */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">🌎 Flights by Origin Country</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={countryData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label
+              >
+                {countryData.map((_, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend />
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+
+      {/* Refresh */}
+      <div className="flex justify-center">
+        <Button
+          onClick={fetchFlightData}
+          disabled={refreshing}
+          className="bg-orange-500 hover:bg-orange-600 text-white px-6 rounded-full"
+        >
+          <RefreshCwIcon className={`mr-2 h-4 w-4 ${refreshing ? "animate-spin" : ""}`} />
+          {refreshing ? "Refreshing..." : "Refresh Data"}
+        </Button>
+      </div>
+    </div>
   )
 }
 
-export default PipelineSimulator
-
+export default FlightDashboard

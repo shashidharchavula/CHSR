@@ -6,6 +6,7 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import Loader from "@/components/loader"
 import "./globals.css"
+import 'leaflet/dist/leaflet.css'
 
 // Font configuration
 const inter = Inter({
