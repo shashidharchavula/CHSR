@@ -6,21 +6,13 @@ import "leaflet/dist/leaflet.css"
 
 const FlightMap = ({ flights = [] }) => {
   return (
-    <MapContainer
-      center={[20, 0]}
-      zoom={2}
-      scrollWheelZoom={true}
-      style={{ height: "500px", width: "100%", borderRadius: "12px", zIndex: 0 }}
-    >
+    <MapContainer center={[20, 0]} zoom={2} scrollWheelZoom={true} style={{ height: "500px", width: "100%" }}>
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        attribution='&copy; OpenStreetMap contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
-      {flights.map((flight, idx) => {
-        if (!flight.latitude || !flight.longitude) return null
-
-        return (
+      {flights.map((flight, idx) =>
+        flight.latitude && flight.longitude ? (
           <Marker
             key={idx}
             position={[flight.latitude, flight.longitude]}
@@ -29,10 +21,7 @@ const FlightMap = ({ flights = [] }) => {
                 className: "",
                 html: `
                   <div style="transform: rotate(${flight.heading || 0}deg); width: 32px; height: 32px;">
-                    <img 
-                      src="/plane.png" 
-                      style="width: 32px; height: 32px; transform: rotate(${flight.heading || 0}deg);" 
-                    />
+                    <img src="/icons/plane-icon.png" style="width: 32px; height: 32px; transform: rotate(${flight.heading || 0}deg);" />
                   </div>
                 `,
                 iconSize: [32, 32],
@@ -47,8 +36,8 @@ const FlightMap = ({ flights = [] }) => {
               Speed: {(flight.velocity * 3.6).toFixed(0)} km/h
             </Popup>
           </Marker>
-        )
-      })}
+        ) : null
+      )}
     </MapContainer>
   )
 }
