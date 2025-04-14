@@ -1,7 +1,6 @@
 [build]
-  command = "pnpm run build"
+  command = "npm run build"
   publish = ".next"
-  environment = { NODE_VERSION = "18.18.0", PNPM_FLAGS = "--shamefully-hoist" }
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

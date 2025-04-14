@@ -107,13 +107,14 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button
-              size="lg"
-              className="bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all group"
+            <a
+              href="/resume.pdf"
+              download
+              className="inline-flex items-center justify-center px-6 py-3 text-lg bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all group rounded"
             >
               <DownloadIcon className="mr-2 h-4 w-4 group-hover:animate-bounce" />
               Download Resume
-            </Button>
+            </a>
 
             <Button
               size="lg"
