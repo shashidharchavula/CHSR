@@ -17,7 +17,7 @@ import {
   Cell,
   Legend,
 } from "recharts"
-import FlightMap from "@/components/FlightMapWrapper" // ✅ updated import
+import FlightMap from "@/components/FlightMapWrapper" // ✅ using safe wrapper
 
 const COLORS = ["#f97316", "#10b981", "#3b82f6", "#f43f5e", "#8b5cf6", "#22c55e", "#eab308"]
 

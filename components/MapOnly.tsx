@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import L from "leaflet"
 
-const MapOnly = ({ flights = [] }) => {
+export default function MapOnly({ flights }) {
   return (
     <MapContainer
       center={[20, 0]}
@@ -13,12 +13,11 @@ const MapOnly = ({ flights = [] }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
       {flights.map((flight, idx) => {
         if (!flight.latitude || !flight.longitude) return null
 
         return (
-          <Marker 
+          <Marker
             key={idx}
             position={[flight.latitude, flight.longitude]}
             icon={
@@ -49,5 +48,3 @@ const MapOnly = ({ flights = [] }) => {
     </MapContainer>
   )
 }
-
-export default MapOnly
