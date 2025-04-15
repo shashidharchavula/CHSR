@@ -17,11 +17,14 @@ import {
   Cell,
   Legend,
 } from "recharts"
-import FlightMap from "@/components/FlightMapWrapper" // ✅ using safe wrapper
+import dynamic from "next/dynamic"
+
+// Lazy load map only on client
+const FlightMap = dynamic(() => import("@/components/FlightMap"), { ssr: false })
 
 const COLORS = ["#f97316", "#10b981", "#3b82f6", "#f43f5e", "#8b5cf6", "#22c55e", "#eab308"]
 
-export default function FlightDashboard() {
+const FlightDashboard = () => {
   const [flightData, setFlightData] = useState([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
@@ -52,7 +55,7 @@ export default function FlightDashboard() {
     .slice(0, 5)
     .map((f) => ({
       name: f.callsign || "Unknown",
-      speed: +(f.velocity * 3.6).toFixed(0),
+      speed: +(f.velocity * 3.6).toFixed(0), // m/s to km/h
     }))
 
   const topAltitudeData = [...flightData]
@@ -100,7 +103,7 @@ export default function FlightDashboard() {
         </CardContent>
       </Card>
 
-      {/* Flight Logs */}
+      {/* Flight Log Panel */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg font-bold">🛫 Live Flight Logs</CardTitle>
@@ -108,7 +111,7 @@ export default function FlightDashboard() {
         <CardContent className="space-y-2 max-h-80 overflow-y-auto text-sm">
           {flightData.slice(0, 10).map((f, idx) => (
             <div key={idx} className="border-b pb-2 mb-2">
-              ✈️ <strong>{f.callsign || "Unknown"}</strong>
+              ✈️ <strong>{f.callsign || "Unknown"}</strong>  
               from <span className="text-orange-600">{f.originCountry}</span><br />
               Speed: {(f.velocity * 3.6).toFixed(0)} km/h | Alt: {Math.round(f.altitude)} m
             </div>
@@ -194,3 +197,5 @@ export default function FlightDashboard() {
     </div>
   )
 }
+
+export default FlightDashboard
