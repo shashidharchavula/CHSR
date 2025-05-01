@@ -63,7 +63,7 @@ const AboutSection = () => {
           </div>
 
           <div data-aos="fade-left" className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Data Engineer & Big Data Enthusiast</h3>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Data Engineer</h3>
 
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
               I'm a passionate Data Engineer with expertise in building robust, scalable data pipelines and

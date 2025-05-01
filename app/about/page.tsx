@@ -10,14 +10,14 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 const techStack = [
-  { name: "Apache Spark", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "Snowflake", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "Kafka", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "Python", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "SQL", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "Airflow", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "AWS", icon: "/placeholder.svg?height=40&width=40" },
-  { name: "Azure", icon: "/placeholder.svg?height=40&width=40" },
+  { name: "Apache Spark", icon: "/apache spark.png" },
+  { name: "Snowflake", icon: "/snowflake.png" },
+  { name: "Kafka", icon: "/kafka.png" },
+  { name: "Tableau", icon: "/tableau.png" },
+  { name: "databricks", icon: "/databricks.png" },
+  { name: "Airflow", icon: "airflow.png" },
+  { name: "scala", icon: "scala.png" },
+  { name: "redshift", icon: "/redshift.png?height=40&width=40" },
 ]
 
 const skills = [
@@ -98,7 +98,7 @@ export default function AboutPage() {
           <div className="profile-image">
             <div className="relative w-full max-w-md mx-auto aspect-square rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/placeholder.svg?height=400&width=400"
+                src="/shashidhar.jpg?height=400&width=400"
                 alt="Profile Photo"
                 fill
                 className="object-cover"
@@ -111,14 +111,14 @@ export default function AboutPage() {
 
               {/* Experience badge */}
               <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
-                8+ Years Experience
+                5+ Years Experience
               </div>
             </div>
           </div>
 
           <div className="bio-section space-y-8">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-white font-poppins">
-              Data Engineer & Big Data Specialist
+              Data Engineer
             </h2>
 
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">

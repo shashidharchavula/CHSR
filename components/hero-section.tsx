@@ -82,7 +82,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-4"
           >
-            <span className="text-orange-500">Data Engineer</span>
+            <span className="text-orange-500">shashidhar chavula</span>
             <br />
             <TypeAnimation
               sequence={["Big Data Enthusiast", 2000, "Cloud-Native Builder", 2000]}
@@ -107,14 +107,13 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <a
-              href="/resume.pdf"
-              download
-              className="inline-flex items-center justify-center px-6 py-3 text-lg bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all group rounded"
+            <Button
+              size="lg"
+              className="bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all group"
             >
               <DownloadIcon className="mr-2 h-4 w-4 group-hover:animate-bounce" />
               Download Resume
-            </a>
+            </Button>
 
             <Button
               size="lg"

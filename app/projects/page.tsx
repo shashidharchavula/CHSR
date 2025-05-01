@@ -12,39 +12,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 const projects = [
   {
-    title: "Real-time IoT Cyberattack Detection",
+    title: "Heart Disease Prediction Model",
     description:
-      "A streaming data pipeline that processes IoT device data to detect potential cyberattacks in real-time using machine learning.",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["Apache Kafka", "Spark Streaming", "Python", "ML", "AWS"],
-    github: "#",
+      "LightGBM model with 95% accuracy deployed via a JavaScript/HTML web app",
+    image: "/HDF.GIF?height=300&width=500",
+    tags: ["Machine Learning", "LightGBM", "JavaScript", "HTML"],
+    github: "https://github.com/shashidharchavula/HDF",
     demo: "#",
     longDescription:
-      "This project implements a sophisticated real-time data processing pipeline that ingests data from thousands of IoT devices, processes it through Apache Kafka and Spark Streaming, and applies machine learning models to detect anomalies that could indicate cyberattacks. The system achieves sub-second latency and can scale to handle millions of events per minute.",
+      "Developed a heart disease prediction model using LightGBM that achieved 95% accuracy. The model was deployed as a web application using JavaScript and HTML, making it accessible to healthcare professionals. This project was presented at the IEEE International Conference on Inventive Research in Computing Applications.",
     challenges: [
-      "Handling high-volume, high-velocity data streams from diverse IoT devices",
-      "Implementing ML models that can detect novel attack patterns",
-      "Ensuring low latency for real-time threat detection and response",
-    ],
-    architecture:
-      "The architecture follows a lambda pattern with a speed layer for real-time processing and a batch layer for training ML models. Data flows from IoT devices to Kafka topics, then to Spark Streaming for feature extraction and anomaly detection. Alerts are pushed to a notification service while all data is stored in S3 for later batch processing.",
-    results:
-      "The system successfully reduced false positives by 78% compared to rule-based approaches while maintaining 99.7% detection accuracy. It processes over 50,000 events per second with an average latency of 250ms.",
-  },
-  {
-    title: "Heart Disease Prediction",
-    description:
-      "A hybrid ML model that combines multiple algorithms to predict heart disease with improved accuracy using patient health data.",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["Python", "Scikit-learn", "Pandas", "TensorFlow", "Docker"],
-    github: "#",
-    demo: "#",
-    longDescription:
-      "This project develops an ensemble machine learning model that combines gradient boosting, neural networks, and logistic regression to predict the likelihood of heart disease based on patient health metrics. The hybrid approach achieves higher accuracy than any single model approach.",
-    challenges: [
-      "Balancing the dataset to address class imbalance issues",
-      "Feature engineering to extract meaningful patterns from medical data",
-      "Creating an interpretable model that doctors can trust and understand",
+      "95% prediction accuracy",
+      "IEEE conference presentation",
+      "Web-based deployment for easy access",
+      "Integration with existing healthcare systems",
     ],
     architecture:
       "The system uses a preprocessing pipeline built with Scikit-learn to handle missing values and normalize features. The ensemble model combines predictions from XGBoost, a custom neural network built with TensorFlow, and a logistic regression model. The entire solution is containerized with Docker for easy deployment.",
@@ -52,19 +33,41 @@ const projects = [
       "The final model achieved 94.2% accuracy, 92.8% sensitivity, and 95.1% specificity on the test dataset, outperforming previous approaches by 7-12%. The model is currently being evaluated for clinical use.",
   },
   {
-    title: "MRITS Learning Hub",
+    title: "Medical Claims Fraud Detection",
     description:
-      "A full-stack application for online learning with features like course management, student progress tracking, and content delivery.",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["React", "Node.js", "MongoDB", "Express", "AWS S3"],
-    github: "#",
+      "Use anomaly detection, clustering, or classification algorithms to flag suspicious claims based on patterns in the data",
+    image: "/mfd.jpg?height=300&width=500",
+    tags: ["Anomaly Detection", "Machine Learning", "Matplotlib", "Seaborn", "Clustering", "Fraud Detection", "GitHub Pages"],
+    github: "https://github.com/shashidharchavula/Medical-claims-fraud-detection",
+    demo: "https://shashidharchavula.github.io/dashboard/",
+    longDescription:
+      "This project simulates a medical claims fraud detection system by generating synthetic data and applying multiple machine learning techniques—supervised classification (Random Forest), unsupervised anomaly detection (Isolation Forest), and clustering (DBSCAN)—to identify potentially fraudulent claims. The analysis is visualized with automatically generated plots (confusion matrix, ROC curve, clustering plots), which are integrated into an interactive HTML dashboard and deployed live on GitHub Pages",
+    challenges: [
+      "Real-time data collection and processing",
+      "Autonomous navigation capabilities",
+      "Cloud-based monitoring and control",
+      "Scalable IoT architecture",
+    ],
+    architecture:
+      "The system uses a preprocessing pipeline built with Scikit-learn to handle missing values and normalize features. The ensemble model combines predictions from XGBoost, a custom neural network built with TensorFlow, and a logistic regression model. The entire solution is containerized with Docker for easy deployment.",
+    results:
+      "The final model achieved 94.2% accuracy, 92.8% sensitivity, and 95.1% specificity on the test dataset, outperforming previous approaches by 7-12%. The model is currently being evaluated for clinical use.",
+  },
+  {
+    title: "customer-segmentation",
+    description:
+      "K-means clustering model to identify customer segments for targeted marketing",
+    image: "/plot.jpg?height=400&width=600",
+    tags: ["Machine Learning", "K-means", "Customer Analytics"],
+    github: "https://github.com/example/customer-segmentation",
     demo: "#",
     longDescription:
-      "MRITS Learning Hub is a comprehensive e-learning platform designed for educational institutions. It features course creation and management tools, interactive learning materials, progress tracking, assessments, and analytics dashboards for instructors and administrators.",
+      "Developed a customer segmentation analysis using K-means clustering to identify distinct customer segments based on purchasing behavior, demographics, and engagement metrics. The insights were used to create targeted marketing campaigns that increased conversion rates by 20%.",
     challenges: [
-      "Building a scalable content delivery system for video lectures and materials",
-      "Implementing a flexible assessment engine that supports various question types",
-      "Creating an intuitive UI that works across devices and connection speeds",
+      "Identified 5 distinct customer segments",
+      "20% increase in marketing conversion rates",
+      "15% improvement in customer retention",
+      "Data-driven personalization strategy",
     ],
     architecture:
       "The application uses a MERN stack (MongoDB, Express, React, Node.js) architecture. Content is stored in AWS S3, with CloudFront for distribution. Authentication is handled via JWT, and the system includes real-time features using Socket.io for live sessions and chat.",
@@ -72,19 +75,20 @@ const projects = [
       "The platform currently serves over 5,000 students and 200 instructors, hosting more than 150 courses. Student engagement metrics show a 45% increase in course completion rates compared to the previous system.",
   },
   {
-    title: "Enterprise ETL Pipeline",
+    title: "Real-time Fraud Detection System",
     description:
-      "A production-ready ETL pipeline with data extraction from multiple sources, transformation, and loading into a data warehouse.",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["Airflow", "Python", "Snowflake", "dbt", "Docker"],
+      "Machine learning model to detect fraudulent transactions in real-time",
+    image: "/FD.jpg?height=400&width=600",
+    tags: ["Machine Learning", "Real-time Processing", "Fraud Detection"],
     github: "#",
-    demo: "#",
+    demo: "/fraud.pdf",
     longDescription:
-      "This project showcases a production-ready ETL pipeline that extracts data from multiple sources (APIs, databases, and file systems), transforms it using a combination of Python and SQL transformations, and loads it into a Snowflake data warehouse with proper dimensional modeling.",
+      "Built a real-time fraud detection system using machine learning algorithms to identify suspicious transactions as they occur. The system processes millions of transactions daily with a false positive rate of less than 0.1%, saving the company an estimated $2M annually in fraud prevention.",
     challenges: [
-      "Handling diverse data sources with different schemas and update frequencies",
-      "Implementing idempotent transformations for reliable processing",
-      "Designing a flexible pipeline that can easily incorporate new data sources",
+      "99.5% detection accuracy",
+      "$2M annual savings in fraud prevention",
+      "Real-time processing of 1000+ transactions per second",
+      "Less than 0.1% false positive rate",
     ],
     architecture:
       "The pipeline uses Apache Airflow for orchestration, with custom operators for different data sources. Transformations are implemented as a combination of Python processors and dbt models. The entire solution runs in Docker containers and can be deployed to any cloud provider.",
@@ -281,9 +285,9 @@ export default function ProjectsPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2 font-poppins">Challenges</h3>
                   <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300">
-                    {selectedProject.challenges.map((challenge, index) => (
+                    {selectedProject.challenges.map((challenges, index) => (
                       <li key={index} className="leading-relaxed">
-                        {challenge}
+                        {challenges}
                       </li>
                     ))}
                   </ul>

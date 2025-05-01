@@ -89,10 +89,10 @@ export default function Home() {
       <div className="container mx-auto px-4 z-10 mt-16 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white mb-6 font-poppins">
-            <span className="text-orange-500">Data Engineer</span>
+            <span className="text-orange-500">shashidhar chavula</span>
             <br />
             <TypeAnimation
-              sequence={["Big Data Specialist", 2000, "Cloud Solutions Architect", 2000, "Pipeline Engineer", 2000]}
+              sequence={["Data Engineer", 2000, "Data Analyst", 2000, "Pipeline Engineer", 2000]}
               wrapper="span"
               speed={40}
               repeat={Number.POSITIVE_INFINITY}
@@ -111,7 +111,9 @@ export default function Home() {
               className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all group rounded-full px-6"
             >
               <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume
+              <a href="/Shashidhar Chavula Resume.pdf" download>
+               Show Resume
+              </a>
             </Button>
 
             <Link href="/about" passHref>
