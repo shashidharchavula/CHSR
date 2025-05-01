@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
+import React from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-export default function TestMap() {
+export default function TestMapPage() {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <MapContainer
@@ -21,5 +22,5 @@ export default function TestMap() {
         </Marker>
       </MapContainer>
     </div>
-  )
+  );
 }
