@@ -52,7 +52,7 @@ const FlightDashboard = () => {
 
   const topSpeedData = [...flightData]
     .sort((a, b) => b.velocity - a.velocity)
-    .slice(0, 5)
+    .slice(0, 10)
     .map((f) => ({
       name: f.callsign || "Unknown",
       speed: +(f.velocity * 3.6).toFixed(0), // m/s to km/h
@@ -60,7 +60,7 @@ const FlightDashboard = () => {
 
   const topAltitudeData = [...flightData]
     .sort((a, b) => b.altitude - a.altitude)
-    .slice(0, 5)
+    .slice(0, 10)
     .map((f) => ({
       name: f.callsign || "Unknown",
       altitude: Math.round(f.altitude),
@@ -122,7 +122,7 @@ const FlightDashboard = () => {
       {/* Top Speeds */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg font-bold">🚀 Top 5 Fastest Flights (km/h)</CardTitle>
+          <CardTitle className="text-lg font-bold">🚀 Top 10 Fastest Flights (km/h)</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
@@ -140,7 +140,7 @@ const FlightDashboard = () => {
       {/* Highest Altitudes */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg font-bold">🛫 Top 5 Highest Altitude Flights (m)</CardTitle>
+          <CardTitle className="text-lg font-bold">🛫 Top 10 Highest Altitude Flights (m)</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
