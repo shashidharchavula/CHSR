@@ -15,25 +15,25 @@ const themeColor = "#f97316"
 
 const experiences = [
   {
-    company: "Data Engineering Inc.",
-    position: "Senior Data Engineer",
-    period: "2021 - Present",
-    location: "San Francisco, CA",
+    company: "Florida UniversityInternational",
+    position: "Graduate Teaching Assistant",
+    period: "Aug 2023 - Dec 202024",
+    location: "Miami, FL",
     description:
-      "Leading the design and implementation of enterprise data pipelines, optimizing data warehouse architecture, and mentoring junior engineers.",
+      "Conducted lab sessions on database design, ETL processes, and data visualization.",
     achievements: [
-      "Reduced data processing costs by 40% through migration to cloud-native architecture",
-      "Implemented real-time data streaming solution increasing business insights delivery by 65%",
-      "Architected data mesh approach improving cross-team collaboration",
+      "Mentored students in Python scripting and cloud deployment (AWS/Azure).",
+      "Assisted professors in developing course materials for data engineering classes.",
+      "Evaluated student projects and provided constructive feedback to improve their technical skills.",
     ],
-    technologies: ["Apache Spark", "Airflow", "AWS", "Snowflake", "Terraform", "Python"],
+    technologies: ["Apache Spark", "Airflow", "AWS", "Snowflake", "Snowflake", "Python"],
     color: themeColor,
   },
   {
-    company: "Tech Solutions Group",
+    company: "infosys",
     position: "Data Engineer",
-    period: "2018 - 2021",
-    location: "Seattle, WA",
+    period: "Sep 2021 - Jan 2023",
+    location: "Hyderabad, India",
     description: "Developed and maintained ETL pipelines, data warehousing solutions, and reporting infrastructure.",
     achievements: [
       "Built automated data quality monitoring system reducing error rates by 75%",
@@ -44,10 +44,10 @@ const experiences = [
     color: themeColor,
   },
   {
-    company: "Analytics Startup",
+    company: "oh-look",
     position: "Data Analyst",
-    period: "2016 - 2018",
-    location: "Austin, TX",
+    period: "jan 2020 - sep 2021",
+    location: "Hyderabad, India",
     description:
       "Performed data analysis, built dashboards, and developed initial data pipelines for business intelligence.",
     achievements: [
@@ -55,7 +55,7 @@ const experiences = [
       "Created comprehensive product analytics dashboard driving strategic decisions",
       "Designed and implemented initial data warehouse schema",
     ],
-    technologies: ["Python", "SQL", "Tableau", "Excel", "PostgreSQL"],
+    technologies: ["Star/Snowflake Schema", "SQL", "Tableau", "Excel", "PostgreSQL"],
     color: themeColor,
   },
 ]

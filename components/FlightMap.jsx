@@ -10,17 +10,19 @@ const FlightMap = ({ flights = [] }) => {
       center={[20, 0]}
       zoom={2}
       scrollWheelZoom={true}
+      worldCopyJump={false}
+      maxBounds={[[-90, -180], [90, 180]]}
+      maxBoundsViscosity={1.0}
       style={{ height: "500px", width: "100%", borderRadius: "12px", zIndex: 0 }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        noWrap={true}
       />
 
-      {flights.map((flight, idx) => {
-        if (!flight.latitude || !flight.longitude) return null
-
-        return (
+      {flights.map((flight, idx) => (
+        flight.latitude && flight.longitude && (
           <Marker
             key={idx}
             position={[flight.latitude, flight.longitude]}
@@ -48,7 +50,7 @@ const FlightMap = ({ flights = [] }) => {
             </Popup>
           </Marker>
         )
-      })}
+      ))}
     </MapContainer>
   )
 }

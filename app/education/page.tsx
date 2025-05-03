@@ -12,29 +12,28 @@ const themeColor = "#f97316"
 
 const education = [
   {
-    institution: "Tech University",
+    institution: "Florida International University",
     degree: "Master of Science in Computer Science",
-    focus: "Specialization in Big Data Systems",
-    period: "2014 - 2016",
-    location: "Boston, MA",
+    focus: "Specialization in Data Science",
+    period: "2023 - 2024",
+    location: "Miami, FL",
     achievements: [
-      "Thesis: 'Optimizing Distributed Data Processing for Real-time Analytics'",
-      "GPA: 3.9/4.0",
-      "Teaching Assistant for Database Systems course",
+      "GPA: 3.52/4.0",
+      "Graduate Teaching Assistant for Storage Systems course and BlockChain Networks",
     ],
     color: themeColor,
     certificate: "#",
   },
   {
-    institution: "Engineering College",
-    degree: "Bachelor of Engineering in Computer Science",
+    institution: "Vignan Institute of Technology and science",
+    degree: "Bachelor of Engineering in Computer Science and Engineering",
     focus: "Minor in Mathematics and Statistics",
-    period: "2010 - 2014",
-    location: "Chicago, IL",
+    period: "2017 - 2021",
+    location: "Telangana, India",
     achievements: [
-      "Graduated with Honors (Magna Cum Laude)",
-      "Senior Project: 'Predictive Analytics for E-commerce Platforms'",
-      "President of Data Science Club",
+      "",
+      "Senior Project: 'Heart Disease prediction model'",
+      "minor Project :Facial Expression Detection Using ANN",
     ],
     color: themeColor,
     certificate: "#",
@@ -43,35 +42,32 @@ const education = [
 
 const certifications = [
   {
-    name: "AWS Certified Data Analytics",
-    issuer: "Amazon Web Services",
-    date: "2022",
+    name: "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
+    issuer: "Oracle",
+    date: "2024",
     icon: "/placeholder.svg?height=40&width=40",
-    certificateUrl: "#",
-    credentialId: "AWS-DA-12345",
+    certificateUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4025F4F9E262FA4DBD1B320C9ED305731CC15D6A7A35DB44BCDE5F68059598B2",
   },
   {
-    name: "Databricks Certified Engineer",
-    issuer: "Databricks",
-    date: "2021",
+    name: "Cisco Certified Network Associate (CCNA) – Routing and Switching",
+    issuer: "Cisco",
     icon: "/placeholder.svg?height=40&width=40",
-    certificateUrl: "#",
+    certificateUrl: "/ccna2.pdf",
     credentialId: "DB-CE-67890",
   },
   {
-    name: "Snowflake SnowPro Core",
-    issuer: "Snowflake",
-    date: "2020",
+    name: "Introduction to Cybersecurity Tools & Cyber Attacks  ",
+    issuer: "IBM",
     icon: "/placeholder.svg?height=40&width=40",
-    certificateUrl: "#",
+    certificateUrl: "https://coursera.org/share/b4be7d38d242a697d732524fa79ff94c",
     credentialId: "SP-CORE-54321",
   },
   {
-    name: "Google Professional Data Engineer",
-    issuer: "Google Cloud",
-    date: "2019",
+    name: "Google Data Analytics Capstone: Complete a Case Study",
+    issuer: "Google",
+    date: "2025",
     icon: "/placeholder.svg?height=40&width=40",
-    certificateUrl: "#",
+    certificateUrl: "https://coursera.org/share/fa924f4e06627010aef94eae9038717c",
     credentialId: "GCP-PDE-98765",
   },
 ]
@@ -147,7 +143,7 @@ export default function EducationPage() {
             </h2>
             <div className="w-20 h-1 bg-orange-500 mx-auto rounded-full"></div>
             <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Industry-recognized certifications that validate my expertise in data engineering technologies.
+              Industry-recognized certifications that validate my expertise.
             </p>
           </div>
 
