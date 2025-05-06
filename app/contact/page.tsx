@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import type React from "react"
+import { send } from "@emailjs/browser"
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -27,19 +28,24 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    // In a real application, you would integrate EmailJS or similar here
     setIsSubmitting(true)
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      await send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formData,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
       setSubmitStatus("success")
       setFormData({ name: "", email: "", subject: "", message: "" })
-
-      // Reset status after 5 seconds
+    } catch (error) {
+      console.error("EmailJS error:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
       setTimeout(() => setSubmitStatus(null), 5000)
-    }, 1500)
+    }
   }
 
   useEffect(() => {
@@ -250,4 +256,3 @@ export default function ContactPage() {
     </div>
   )
 }
-
