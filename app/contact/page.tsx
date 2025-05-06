@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import type React from "react"
-import { send } from "@emailjs/browser"
+import { send } from "@emailjs/browser"            // ← EmailJS import
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -179,13 +179,13 @@ export default function ContactPage() {
                 </label>
                 <Input
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Project Discussion, Opportunity, etc."
-                  required
-                  className="border-gray-300 dark:border-gray-600 focus:border-orange-500 dark:focus:border-orange-500"
-                />
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Project Discussion, Opportunity, etc."
+                    required
+                    className="border-gray-300 dark:border-gray-600 focus:border-orange-500 dark:focus:border-orange-500"
+                  />
               </div>
 
               <div className="space-y-2">
@@ -236,7 +236,7 @@ export default function ContactPage() {
                         <path
                           className="opacity-75"
                           fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2-647z"
                         ></path>
                       </svg>
                       Sending...
