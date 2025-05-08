@@ -106,15 +106,20 @@ export default function Home() {
           </p>
 
           <div className="hero-buttons flex flex-col sm:flex-row gap-6 justify-center">
-            <Button
-              size="lg"
-              className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all group rounded-full px-6"
+            <a
+              href="/Shashidhar%20Chavula%20Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-block"
             >
-              <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              <a href="/Shashidhar Chavula Resume.pdf" download>
-               Show Resume
-              </a>
-            </Button>
+              <Button
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all rounded-full px-6"
+              >
+                <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Show Resume
+              </Button>
+            </a>
 
             <Link href="/about" passHref>
               <Button

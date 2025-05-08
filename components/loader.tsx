@@ -61,7 +61,7 @@ export default function Loader() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <span className="text-orange-500 font-bold">DE</span>
+          <span className="text-orange-500 font-bold">CHSR</span>
         </motion.div>
       </div>
     </motion.div>
