@@ -134,9 +134,12 @@ export default function ContactPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Download my complete resume to learn more about my experience and skills.
               </p>
-              <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              <a href="/shashidhar_chavula_Resume.pdf" download></a>
+              
+              <a href="/shashidhar_chavula_Resume.pdf" download
+              className="inline-flex items-center group">
+              <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce text-orange-500" />  
               <Button className="bg-orange-500 hover:bg-orange-600 text-white">Download Resume</Button>
+              </a>
             </div>
           </div>  
 
