@@ -116,7 +116,6 @@ export default function Home() {
                 size="lg"
                 className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all rounded-full px-6"
               >
-                <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
                 Show Resume
               </Button>
             </a>

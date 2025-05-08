@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
-import { ArrowUpIcon, GithubIcon, LinkedinIcon, MailIcon, TwitterIcon } from "lucide-react"
+import { ArrowUpIcon, GithubIcon, LinkedinIcon, MailIcon, TwitterIcon, InstagramIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -28,24 +28,24 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-4 font-poppins">
-              <span className="text-orange-500">Data</span>Engineer
+              <span className="text-orange-500">Shashidahr</span>Chavula
             </h2>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
               Building robust data pipelines and architectures that turn raw data into valuable insights. Specialized in
               big data technologies and cloud-native solutions.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/shashidhar-reddy-chavula-23b567172/" className="text-gray-400 hover:text-orange-500 transition-colors" aria-label="LinkedIn">
                 <LinkedinIcon className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors" aria-label="GitHub">
+              <a href="https://github.com/shashidharchavula" className="text-gray-400 hover:text-orange-500 transition-colors" aria-label="GitHub">
                 <GithubIcon className="h-6 w-6" />
               </a>
               <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors" aria-label="Twitter">
                 <TwitterIcon className="h-6 w-6" />
               </a>
               <a
-                href="mailto:contact@dataengineer.com"
+                href="mailto:shashidhar17567@gmail.com"
                 className="text-gray-400 hover:text-orange-500 transition-colors"
                 aria-label="Email"
               >
@@ -86,32 +86,6 @@ const Footer = () => {
                 <Link href="/contact" className="text-gray-400 hover:text-orange-500 transition-colors">
                   Contact
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-white font-poppins">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Data Engineering Guide
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Open Source Projects
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Tech Stack
-                </a>
               </li>
             </ul>
           </div>
