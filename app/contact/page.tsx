@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { GithubIcon, LinkedinIcon, MailIcon, SendIcon } from "lucide-react"
+import { GithubIcon, LinkedinIcon,DownloadIcon, MailIcon, SendIcon } from "lucide-react"
 import { gsap } from "gsap"
 
 export default function ContactPage() {
@@ -108,22 +108,22 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div className="flex items-center text-gray-600 dark:text-gray-300 social-icon">
                   <MailIcon className="h-5 w-5 mr-3 text-orange-500" />
-                  <a href="mailto:contact@dataengineer.com" className="hover:text-orange-500 transition-colors">
-                    contact@dataengineer.com
+                  <a href="mailto:shashidhar17567@gmail.com" className="hover:text-orange-500 transition-colors">
+                    shashidhar17567@gmail.com
                   </a>
                 </div>
 
                 <div className="flex items-center text-gray-600 dark:text-gray-300 social-icon">
                   <LinkedinIcon className="h-5 w-5 mr-3 text-orange-500" />
-                  <a href="#" className="hover:text-orange-500 transition-colors">
-                    linkedin.com/in/dataengineer
+                  <a href="https://www.linkedin.com/in/shashidhar-reddy-chavula-23b567172/" className="hover:text-orange-500 transition-colors">
+                    linkedin.com/in/shashidhar chavula
                   </a>
                 </div>
 
                 <div className="flex items-center text-gray-600 dark:text-gray-300 social-icon">
                   <GithubIcon className="h-5 w-5 mr-3 text-orange-500" />
-                  <a href="#" className="hover:text-orange-500 transition-colors">
-                    github.com/dataengineer
+                  <a href="https://github.com/shashidharchavula" className="hover:text-orange-500 transition-colors">
+                    github.com/shashidharchavula
                   </a>
                 </div>
               </div>
@@ -134,9 +134,11 @@ export default function ContactPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Download my complete resume to learn more about my experience and skills.
               </p>
+              <DownloadIcon className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+              <a href="/shashidhar_chavula_Resume.pdf" download></a>
               <Button className="bg-orange-500 hover:bg-orange-600 text-white">Download Resume</Button>
             </div>
-          </div>
+          </div>  
 
           <div className="contact-right">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -150,7 +152,7 @@ export default function ContactPage() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Your name..."
                     required
                     className="border-gray-300 dark:border-gray-600 focus:border-orange-500 dark:focus:border-orange-500"
                   />
