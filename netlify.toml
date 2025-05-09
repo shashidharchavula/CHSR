@@ -4,3 +4,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[build]
+  functions = "netlify/functions"
+
+[dev]
+  functions = "netlify/functions"
