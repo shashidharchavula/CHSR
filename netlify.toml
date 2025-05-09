@@ -1,11 +1,6 @@
 [build]
-  functions = "netlify/functions"
+  command = "npm run build"
+  publish = ".next"
 
-[dev]
-  framework = "next"
-  command   = "npm run dev"
-  port      = 8888
-
-[dev.functions]
-  directory = "netlify/functions"
-
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
