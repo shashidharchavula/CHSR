@@ -66,7 +66,7 @@ export default function DashboardPage() {
           </motion.h1>
           <div className="w-20 h-1 bg-orange-500 mx-auto rounded-full"></div>
           <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Interactive visualizations of real-time data, pipeline performance metrics, and database schema explorer.
+            Interactive visualizations of real-time data metrics, and database schema explorer.
           </p>
         </div>
 
@@ -85,7 +85,7 @@ export default function DashboardPage() {
                 className="data-[state=active]:bg-orange-500 data-[state=active]:text-white rounded-full"
               >
                 <ActivityIcon className="h-4 w-4 mr-2" />
-                Pipeline
+                Flight-Stats
               </TabsTrigger>
               <TabsTrigger
                 value="schema"
@@ -108,12 +108,12 @@ export default function DashboardPage() {
               <TabsContent value="pipeline" className="mt-0">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 font-poppins">
-                    ETL Pipeline <span className="text-orange-500">Simulator</span>
+                    Real Time <span className="text-orange-500">Flight-stats</span>
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-3xl">
-                    This interactive visualization demonstrates how data flows through an ETL (Extract, Transform, Load)
-                    pipeline. The simulator shows data packets moving from source systems through transformation
-                    processes to the final data warehouse.
+                    This interactive dashboard displays live flight data arriving from airlines,
+                    radar, and weather feeds. Each update is parsed and enriched before appearing
+                    as up-to-the-second status cards on the dashboard interface.
                   </p>
                   <React.Suspense
                     fallback={

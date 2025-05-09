@@ -1,6 +1,17 @@
+# netlify.toml (at the very root of your repo)
+
 [build]
-  command = "npm run build"
-  publish = ".next"
+  command   = "npm run build"
+  publish   = ".next"
+  functions = "netlify/functions"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[dev]
+  framework = "next"
+  command   = "npm run dev"
+  port      = 8888
+  functions = "netlify/functions"
+
+# Remove any [dev.functions] table—`functions` belongs directly under [dev].
