@@ -1,15 +1,21 @@
 // netlify/functions/fetchFlights.js
+
 exports.handler = async () => {
   try {
-    console.log("✈️  [fetchFlights] invoking…")
-    const response = await fetch("https://opensky-network.org/api/states/all")
-    console.log("✈️  [fetchFlights] upstream status:", response.status)
-    if (!response.ok) {
-      throw new Error(`OpenSky returned ${response.status} ${response.statusText}`)
+    console.log("✈️  [fetchFlights] starting…")
+
+    // Use the built-in fetch (Node 18+ on Netlify)
+    const res = await fetch("https://opensky-network.org/api/states/all", {
+      // optional: set a short timeout if you like
+    })
+    console.log("✈️  [fetchFlights] upstream status:", res.status)
+
+    if (!res.ok) {
+      throw new Error(`OpenSky responded ${res.status} ${res.statusText}`)
     }
 
-    const data = await response.json()
-    console.log("✈️  [fetchFlights] got", Array.isArray(data.states) ? data.states.length : 0, "states")
+    const data = await res.json()
+    console.log("✈️  [fetchFlights] got states:", Array.isArray(data.states) ? data.states.length : "(none)")
 
     const flights = (data.states || [])
       .filter((s) => s[5] != null && s[6] != null && s[9] != null)
@@ -24,6 +30,7 @@ exports.handler = async () => {
         heading: s[10] || 0,
       }))
 
+    console.log("✈️  [fetchFlights] returning", flights.length, "items")
     return {
       statusCode: 200,
       body: JSON.stringify(flights),
