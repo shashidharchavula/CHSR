@@ -1,12 +1,24 @@
+# ┌───────────────────────────────────────────────────────────┐
+# │ 1. Build settings                                         │
+# └───────────────────────────────────────────────────────────┘
 [build]
-  command = "npm run build"
-  publish = ".next"
+  command   = "npm run build"        # your build command (e.g. "next build")
+  publish   = ".next"                # for Netlify’s Next.js plugin, or use "out" if you export
+  functions = "netlify/functions"    # where your fetchFlights.js lives
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ 2. Next.js support (requires @netlify/plugin-nextjs)     │
+# └───────────────────────────────────────────────────────────┘
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[build]
-  functions = "netlify/functions"
-
+# ┌───────────────────────────────────────────────────────────┐
+# │ 3. Local development settings                            │
+# └───────────────────────────────────────────────────────────┘
 [dev]
-  functions = "netlify/functions"
+  framework = "next"                 # lets Netlify Dev know you’re using Next.js
+  command   = "npm run dev"
+  port      = 8888
+
+[dev.functions]
+  directory = "netlify/functions"
