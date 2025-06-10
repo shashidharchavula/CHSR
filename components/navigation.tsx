@@ -54,7 +54,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white font-poppins">
-            <span className="text-orange-500">Data</span>Engineer
+            <span className="text-orange-500">Data</span>Analyst
           </Link>
 
           {/* Desktop Navigation */}

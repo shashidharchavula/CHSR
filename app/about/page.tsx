@@ -17,18 +17,19 @@ const techStack = [
   { name: "databricks", icon: "/databricks.png" },
   { name: "Airflow", icon: "airflow.png" },
   { name: "scala", icon: "scala.png" },
+  { name: "Power BI", icon: "powerbi.png"}
   { name: "redshift", icon: "/redshift.png?height=40&width=40" },
 ]
 
 const skills = [
-  "ETL/ELT Pipeline Development",
-  "Data Modeling",
-  "Real-time Processing",
-  "Cloud Infrastructure",
-  "Database Architecture",
-  "Performance Optimization",
-  "CI/CD for Data Pipelines",
-  "Data Governance",
+  "ETL Pipeline Development",
+  "Real-time Data Processing ",
+  "Data Validation & Quality Assurance",
+  "Data Visualization",
+  "Cloud Analytics Infrastructure",
+  "SQL Query Optimization",
+  "Predictive Modeling",
+  "Data Governance"
 ]
 
 export default function AboutPage() {
@@ -89,7 +90,7 @@ export default function AboutPage() {
           </h1>
           <div className="about-line w-20 h-1 bg-orange-500 mx-auto rounded-full transform origin-center"></div>
           <p className="about-description mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            A seasoned data engineer with expertise in building scalable data infrastructure and pipelines that
+            A seasoned data Analyst with expertise in building scalable data infrastructure and pipelines that
             transform raw data into actionable insights.
           </p>
         </div>
@@ -111,18 +112,18 @@ export default function AboutPage() {
 
               {/* Experience badge */}
               <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
-                5+ Years Experience
+                4+ Years Experience
               </div>
             </div>
           </div>
 
           <div className="bio-section space-y-8">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-white font-poppins">
-              Data Engineer
+              Data Analyst
             </h2>
 
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm a passionate Data Engineer with expertise in building robust, scalable data pipelines and
+              I'm a passionate Data Analyst with expertise in building robust, scalable data dashboards, pipelines and
               architectures. With a strong foundation in distributed systems and cloud technologies, I help
               organizations transform raw data into valuable insights.
             </p>

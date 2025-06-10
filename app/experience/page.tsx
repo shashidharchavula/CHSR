@@ -14,48 +14,66 @@ import { gsap } from "gsap"
 const themeColor = "#f97316"
 
 const experiences = [
+    {
+    company: "Mckinsey & Company",
+    position: "Jr. Consultant/Data Analyst",
+    period: "April  2025 - present",
+    location: "FL, USA",
+    description:
+      "Built robust, real-time data pipelines and analytics solutions enhancing strategic insights.",
+    achievements: [
+      "Developed ETL pipelines with AWS Glue and PySpark on Azure Databricks, processing 12TB monthly for real-time supply chain analytics.",
+      "Built Power BI dashboards integrated with Kafka, significantly reducing decision-making time for multiple client departments.",
+      "Automated data validation processes using PySpark, eliminating hundreds of quarterly data quality issues.",
+    ],
+    technologies: ["AWS Glue", "PySpark", "Azure Databricks", "Apache Kafka, SQL", "Power BI"],
+    color: themeColor,
+  },
   {
     company: "Florida UniversityInternational",
     position: "Graduate Teaching Assistant",
-    period: "Aug 2023 - Dec 202024",
+    period: "August 2023 - December 202024",
     location: "Miami, FL",
     description:
-      "Conducted lab sessions on database design, ETL processes, and data visualization.",
+      "Conducted in-depth data analysis and created dashboards to inform strategic decisions.",
     achievements: [
-      "Mentored students in Python scripting and cloud deployment (AWS/Azure).",
-      "Assisted professors in developing course materials for data engineering classes.",
-      "Evaluated student projects and provided constructive feedback to improve their technical skills.",
+      "Managed 15+ Power BI dashboards, delivering insights into sales performance and customer behavior.",
+      "Performed extensive SQL analysis on datasets exceeding 1 million records, facilitating business strategy decisions.",
+      "Applied data mining techniques on financial transaction data to uncover key insights and support product development.",
+      
     ],
-    technologies: ["Apache Spark", "Airflow", "AWS", "Snowflake", "Snowflake", "Python"],
+    technologies: [ "SQL Server", "T-SQL", "Power BI", "Data Mining Techniques", "Python"
+
+],
     color: themeColor,
   },
   {
     company: "infosys",
-    position: "Data Engineer",
-    period: "Sep 2021 - Jan 2023",
+    position: "Data Analyst",
+    period: "September 2021 - January 2023",
     location: "Hyderabad, India",
-    description: "Developed and maintained ETL pipelines, data warehousing solutions, and reporting infrastructure.",
+    description: "Developed advanced analytics and automated ETL solutions enhancing data integrity and operational efficiency.",
     achievements: [
-      "Built automated data quality monitoring system reducing error rates by 75%",
-      "Migrated on-premise data warehouse to Snowflake, improving query performance by 10x",
-      "Created CI/CD pipeline for data infrastructure as code",
+      "Automated ETL workflows using Apache Airflow, significantly improving system reliability.",
+      "Built predictive analytics models using R for risk assessment and operational planning.",
+      "Scaled data infrastructure with AWS Redshift, optimizing performance for workloads over 15 TB.",
     ],
-    technologies: ["Python", "SQL", "dbt", "Docker", "Snowflake", "Jenkins"],
+    technologies: [ "Apache Airflow", "AWS Redshift", "R", "SQL", "Python", "VBA", "ArcGIS", "Alation", "Oracle DB"],
     color: themeColor,
   },
   {
     company: "oh-look",
     position: "Data Analyst",
-    period: "jan 2020 - sep 2021",
+    period: "july 2020 - August 2021",
     location: "Hyderabad, India",
     description:
-      "Performed data analysis, built dashboards, and developed initial data pipelines for business intelligence.",
+      "Optimized SQL database performance through query refinement, indexing, and improved data retrieval.",
     achievements: [
-      "Developed Python scripts automating manual reporting processes saving 25 hours weekly",
-      "Created comprehensive product analytics dashboard driving strategic decisions",
-      "Designed and implemented initial data warehouse schema",
+      "Automated ETL workflows using Apache Airflow, significantly improving system reliability.",
+      "Strengthened PostgreSQL database security with role-based controls, encryption, and compliance measures.",
+      "Automated reporting and analytics workflows using Excel macros and Python (Pandas), streamlining operations",
     ],
-    technologies: ["Star/Snowflake Schema", "SQL", "Tableau", "Excel", "PostgreSQL"],
+    technologies: ["PostgreSQL", "SQL", "Python (Pandas)", "Excel (PivotTables, Macros, VLOOKUP)", "Power Query"],
     color: themeColor,
   },
 ]

@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-4 font-poppins">
-              <span className="text-orange-500">Shashidahr</span>Chavula
+              <span className="text-orange-500">Shashidhar</span>Chavula
             </h2>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
               Building robust data pipelines and architectures that turn raw data into valuable insights. Specialized in

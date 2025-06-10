@@ -71,18 +71,33 @@ const skillCategories = [
     ],
   },
   {
-    name: "Cloud",
+    name: "Cloud & Big data Platforms",
     skills: [
       { name: "AWS", level: 90 },
       { name: "Azure", level: 85 },
-      { name: "GCP", level: 75 },
+      { name: "GCP", level: 70 },
       { name: "Docker", level: 85 },
     ],
     radarData: [
       { subject: "AWS", A: 90, fullMark: 100 },
       { subject: "Azure", A: 85, fullMark: 100 },
-      { subject: "GCP", A: 75, fullMark: 100 },
+      { subject: "GCP", A: 70, fullMark: 100 },
       { subject: "Docker", A: 85, fullMark: 100 },
+    ],
+  },
+    {
+    name: "Data Analytics & Business Intelligence",
+    skills: [
+      { name: "Power BI", level: 90 },
+      { name: "Tableau", level: 90 },
+      { name: "Argis", level: 80 },
+      { name: "Excel", level: 95 },
+    ],
+    radarData: [
+      { subject: "Power BI", A: 90, fullMark: 100 },
+      { subject: "Tableau", A: 85, fullMark: 100 },
+      { subject: "Argis", A: 70, fullMark: 100 },
+      { subject: "Excel", A: 85, fullMark: 100 },
     ],
   },
 ]
