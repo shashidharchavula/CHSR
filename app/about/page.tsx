@@ -17,7 +17,7 @@ const techStack = [
   { name: "databricks", icon: "/databricks.png" },
   { name: "Airflow", icon: "airflow.png" },
   { name: "scala", icon: "scala.png" },
-  { name: "Power BI", icon: "powerbi.png"}
+  { name: "Power BI", icon: "powerbi.png"},
   { name: "redshift", icon: "/redshift.png?height=40&width=40" },
 ]
 

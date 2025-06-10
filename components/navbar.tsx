@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <a href="#home" className="text-2xl font-bold text-gray-900 dark:text-white">
-            <span className="text-orange-500">Data</span>Engineer
+            <span className="text-orange-500">shashidhar</span>chavula
           </a>
 
           {/* Desktop Navigation */}

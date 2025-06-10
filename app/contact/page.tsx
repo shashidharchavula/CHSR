@@ -108,8 +108,8 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div className="flex items-center text-gray-600 dark:text-gray-300 social-icon">
                   <MailIcon className="h-5 w-5 mr-3 text-orange-500" />
-                  <a href="mailto:shashidhar17567@gmail.com" className="hover:text-orange-500 transition-colors">
-                    shashidhar17567@gmail.com
+                  <a href="mailto:shashidharreddy0104@gmail.com" className="hover:text-orange-500 transition-colors">
+                    shashidharreddy0104@gmail.com
                   </a>
                 </div>
 
