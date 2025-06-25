@@ -25,22 +25,61 @@ const SpaceXDashboard = () => {
   const fetchTwitchData = async () => {
     const res = await fetch("/.netlify/functions/fetchTwitch")
     const json = await res.json()
-    if (!Array.isArray(json)) throw new Error("Invalid Twitch response")
-    return json
+    console.log("DEBUG Twitch Response:", json)
+
+    let parsed
+    if (json.body) {
+      try {
+        parsed = JSON.parse(json.body)
+      } catch (e) {
+        throw new Error("Failed to parse Twitch response body")
+      }
+    } else {
+      parsed = json
+    }
+
+    if (!Array.isArray(parsed)) throw new Error("Invalid Twitch response")
+    return parsed
   }
 
   const fetchSteamData = async () => {
     const res = await fetch("/.netlify/functions/fetchSteam")
     const json = await res.json()
-    if (!Array.isArray(json)) throw new Error("Invalid Steam response")
-    return json
+    console.log("DEBUG Steam Response:", json)
+
+    let parsed
+    if (json.body) {
+      try {
+        parsed = JSON.parse(json.body)
+      } catch (e) {
+        throw new Error("Failed to parse Steam response body")
+      }
+    } else {
+      parsed = json
+    }
+
+    if (!Array.isArray(parsed)) throw new Error("Invalid Steam response")
+    return parsed
   }
 
   const fetchYouTubeData = async () => {
     const res = await fetch("/.netlify/functions/fetchYouTube")
     const json = await res.json()
-    if (!Array.isArray(json)) throw new Error("Invalid YouTube response")
-    return json
+    console.log("DEBUG YouTube Response:", json)
+
+    let parsed
+    if (json.body) {
+      try {
+        parsed = JSON.parse(json.body)
+      } catch (e) {
+        throw new Error("Failed to parse YouTube response body")
+      }
+    } else {
+      parsed = json
+    }
+
+    if (!Array.isArray(parsed)) throw new Error("Invalid YouTube response")
+    return parsed
   }
 
   const refreshData = async () => {
