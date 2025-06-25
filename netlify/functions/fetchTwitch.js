@@ -26,9 +26,10 @@ exports.handler = async () => {
       .slice(0, 5)
 
     return {
-      statusCode: 200,
-      body: JSON.stringify(result),
-    }
+  statusCode: 200,
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(result),
+}
   } catch (err) {
     return {
       statusCode: 500,
