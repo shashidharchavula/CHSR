@@ -15,6 +15,7 @@ exports.handler = async () => {
     })
 
     const data = await res.json()
+
     const gameStats = data.data.reduce((acc, stream) => {
       acc[stream.game_name] = (acc[stream.game_name] || 0) + stream.viewer_count
       return acc
@@ -26,13 +27,18 @@ exports.handler = async () => {
       .slice(0, 5)
 
     return {
-  statusCode: 200,
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(result),
-}
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",   // <--- Important header
+      },
+      body: JSON.stringify(result),
+    }
   } catch (err) {
     return {
       statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ error: "Twitch API call failed" }),
     }
   }
