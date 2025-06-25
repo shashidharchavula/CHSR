@@ -3,8 +3,8 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 exports.handler = async () => {
-  const twitchClientId = "ngj0amo6a911ukzsm4vgason0axtwa"
-  const twitchAccessToken = "71itbbaohxoxfx8bh3pek82xi3lemk"
+  const twitchClientId = "f5rgo07yd6m4kti5y5ue73axfyzmwe"
+  const twitchAccessToken = "j13ej9vxuevl9nmn3swvrftsc1n1fc"
 
   try {
     const res = await fetch("https://api.twitch.tv/helix/streams?first=100", {
