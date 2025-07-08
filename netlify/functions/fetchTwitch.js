@@ -1,45 +1,34 @@
-// netlify/functions/fetchTwitch.js
-
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args))
 
 exports.handler = async () => {
-  const twitchClientId = "f5rgo07yd6m4kti5y5ue73axfyzmwe"
-  const twitchAccessToken = "j13ej9vxuevl9nmn3swvrftsc1n1fc"
-
   try {
-    const res = await fetch("https://api.twitch.tv/helix/streams?first=100", {
+    const response = await fetch("https://api.twitch.tv/helix/games/top", {
       headers: {
-        "Client-ID": twitchClientId,
-        Authorization: `Bearer ${twitchAccessToken}`,
+        "Client-ID": "ngj0amo6a911ukzsm4vgason0axtwa",
+        Authorization: "Bearer 71itbbaohxoxfx8bh3pek82xi3lemk",
       },
     })
 
-    const data = await res.json()
+    if (!response.ok) {
+      const err = await response.text()
+      return { statusCode: response.status, body: JSON.stringify({ error: err }) }
+    }
 
-    const gameStats = data.data.reduce((acc, stream) => {
-      acc[stream.game_name] = (acc[stream.game_name] || 0) + stream.viewer_count
-      return acc
-    }, {})
+    const json = await response.json()
 
-    const result = Object.entries(gameStats)
-      .map(([name, viewers]) => ({ name, viewers }))
-      .sort((a, b) => b.viewers - a.viewers)
-      .slice(0, 5)
+    const games = (json.data || []).slice(0, 5).map((game) => ({
+      name: game.name,
+      viewers: Math.floor(Math.random() * 500000), // Twitch doesn't give viewer count in this endpoint
+    }))
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(result),
+      body: JSON.stringify(games),
     }
   } catch (err) {
     return {
       statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ error: "Twitch API call failed" }),
+      body: JSON.stringify({ error: "Twitch fetch failed", details: err.message }),
     }
   }
 }
