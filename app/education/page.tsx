@@ -144,7 +144,7 @@ export default function EducationPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto certification-grid">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-10xl mx-auto certification-grid">
             {certifications.map((cert, index) => (
               <motion.div
                 key={index}
