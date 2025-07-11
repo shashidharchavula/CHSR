@@ -1,13 +1,19 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { gsap } from "gsap"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { GraduationCapIcon, CalendarIcon, MapPinIcon, FileTextIcon, ArrowRightIcon } from "lucide-react"
-import Link from "next/link"
-import { gsap } from "gsap"
+import {
+  GraduationCapIcon,
+  CalendarIcon,
+  MapPinIcon,
+  FileTextIcon,
+  ArrowRightIcon,
+} from "lucide-react"
 
-// Orange theme color
 const themeColor = "#f97316"
 
 const education = [
@@ -21,20 +27,18 @@ const education = [
       "GPA: 3.52/4.0",
       "Graduate Teaching Assistant for Storage Systems course and BlockChain Networks",
     ],
-    color: themeColor,
     certificate: "#",
   },
   {
-    institution: "Vignan Institute of Technology and science",
+    institution: "Vignan Institute of Technology and Science",
     degree: "Bachelor of Engineering in Computer Science and Engineering",
     focus: "Minor in Data Analytics",
     period: "2017 - 2021",
     location: "Telangana, India",
     achievements: [
-      "Major Project: 'Heart Disease prediction model",
-      "minor Project :Facial Expression Detection Using ANN",
+      "Major Project: 'Heart Disease prediction model'",
+      "Minor Project: Facial Expression Detection Using ANN",
     ],
-    color: themeColor,
     certificate: "#",
   },
 ]
@@ -44,35 +48,36 @@ const certifications = [
     name: "Oracle Cloud Infrastructure 2024 Generative AI Certified Professional",
     issuer: "Oracle",
     date: "2024",
-    icon: "/Oraclecert.PNG?height=40&width=40",
-    certificateUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4025F4F9E262FA4DBD1B320C9ED305731CC15D6A7A35DB44BCDE5F68059598B2",
+    icon: "/Oraclecert.PNG",
+    certificateUrl:
+      "https://catalog-education.oracle.com/ords/certview/sharebadge?id=4025F4F9E262FA4DBD1B320C9ED305731CC15D6A7A35DB44BCDE5F68059598B2",
   },
   {
-    name: "Microsoft Certified Fabric Analytics Engineer Associate(Dp-600)",
+    name: "Microsoft Certified Fabric Analytics Engineer Associate (Dp-600)",
     issuer: "Microsoft",
-    icon: "/fabric.PNG?height=40&width=40",
-    certificateUrl: "/Fabricert.pdf",
+    icon: "/Fabric.PNG",
+    certificateUrl: "/Fabriccert.pdf",
     credentialId: "7431310429EC1CBA",
   },
   {
-    name: "Cisco Certified Network Associate (CCNA)-Routing and Switching",
+    name: "Cisco Certified Network Associate (CCNA) - Routing and Switching",
     issuer: "Cisco",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "/placeholder.svg",
     certificateUrl: "/ccna2.pdf",
     credentialId: "DB-CE-67890",
   },
   {
-    name: "Introduction to Cybersecurity Tools & Cyber Attacks  ",
+    name: "Introduction to Cybersecurity Tools & Cyber Attacks",
     issuer: "IBM",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "/placeholder.svg",
     certificateUrl: "https://coursera.org/share/b4be7d38d242a697d732524fa79ff94c",
     credentialId: "SP-CORE-54321",
   },
   {
     name: "Google Cloud Data Analytics Professional",
-    issuer: "Google", 
+    issuer: "Google",
     date: "2025",
-    icon: "/Googlecert.PNG?height=40&width=40",
+    icon: "/Googlecert.PNG",
     certificateUrl: "https://coursera.org/share/fa924f4e06627010aef94eae9038717c",
     credentialId: "GCP-PDE-98765",
   },
@@ -80,14 +85,7 @@ const certifications = [
 
 export default function EducationPage() {
   useEffect(() => {
-    // GSAP animation for the education content
-    gsap.from(".education-header", {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-    })
-
+    gsap.from(".education-header", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
     gsap.from(".education-card", {
       y: 50,
       opacity: 0,
@@ -96,34 +94,25 @@ export default function EducationPage() {
       ease: "power3.out",
       delay: 0.3,
     })
-
     gsap.from(".certification-header", {
       y: 30,
       opacity: 0,
       duration: 0.8,
       ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".certification-section",
-        start: "top 80%",
-      },
     })
-
     gsap.from(".certification-card", {
       y: 30,
       opacity: 0,
       duration: 0.6,
       stagger: 0.15,
       ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".certification-grid",
-        start: "top 80%",
-      },
     })
   }, [])
 
   return (
     <div className="min-h-screen pt-24 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16 education-header">
           <motion.h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Academic <span className="text-orange-500">Background</span>
@@ -134,6 +123,7 @@ export default function EducationPage() {
           </p>
         </div>
 
+        {/* Education Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {education.map((edu, index) => (
             <motion.div key={index} className="education-card" whileHover={{ scale: 1.02 }}>
@@ -142,6 +132,7 @@ export default function EducationPage() {
           ))}
         </div>
 
+        {/* Certifications */}
         <div className="mt-24 certification-section">
           <div className="text-center mb-16 certification-header">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -169,6 +160,7 @@ export default function EducationPage() {
           </div>
         </div>
 
+        {/* CTA */}
         <div className="mt-16 text-center">
           <Link href="/dashboard" passHref>
             <Button className="bg-orange-500 hover:bg-orange-600 text-white group">
@@ -196,10 +188,8 @@ const EducationCard = ({ education }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className="pb-3 relative overflow-hidden">
-        <div
-          className="absolute top-0 right-0 w-24 h-24 transform translate-x-8 -translate-y-8 rounded-full opacity-10"
-          style={{ background: themeColor }}
-        ></div>
+        <div className="absolute top-0 right-0 w-24 h-24 transform translate-x-8 -translate-y-8 rounded-full opacity-10"
+          style={{ background: themeColor }}></div>
         <CardTitle className="text-lg font-bold text-gray-800 dark:text-white">{education.degree}</CardTitle>
         <CardDescription className="font-medium flex items-center">
           <GraduationCapIcon className="h-4 w-4 mr-1" />
@@ -219,7 +209,6 @@ const EducationCard = ({ education }) => {
 
       <CardContent className="flex-grow">
         <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">{education.focus}</p>
-
         <div className="space-y-2">
           {education.achievements.map((achievement, i) => (
             <motion.div
@@ -258,16 +247,22 @@ const CertificationCard = ({ certification }) => {
     <Card className="overflow-hidden border-orange-500/10 hover:border-orange-500/30 transition-colors h-full">
       <CardContent className="p-4 flex flex-col h-full">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center flex-shrink-0">
-            <GraduationCapIcon className="h-6 w-6 text-orange-500" />
+          <div className="h-12 w-12 rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center flex-shrink-0 border border-orange-100">
+            <img
+              src={certification.icon || "/placeholder.svg"}
+              alt={certification.issuer}
+              className="h-10 w-10 object-contain"
+            />
           </div>
           <div className="flex-1">
             <h4 className="font-semibold text-gray-800 dark:text-white text-sm">{certification.name}</h4>
             <div className="flex flex-col mt-1">
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {certification.issuer} • {certification.date}
+                {certification.issuer}{certification.date ? ` • ${certification.date}` : ""}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">ID: {certification.credentialId}</p>
+              {certification.credentialId && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">ID: {certification.credentialId}</p>
+              )}
             </div>
           </div>
         </div>
@@ -288,4 +283,3 @@ const CertificationCard = ({ certification }) => {
     </Card>
   )
 }
-
