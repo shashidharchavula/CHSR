@@ -62,14 +62,14 @@ const certifications = [
   {
     name: "Cisco Certified Network Associate (CCNA) - Routing and Switching",
     issuer: "Cisco",
-    icon: "/placeholder.svg",
+    icon: "/CCNAcert.PNG",
     certificateUrl: "/ccna2.pdf",
     credentialId: "DB-CE-67890",
   },
   {
     name: "Introduction to Cybersecurity Tools & Cyber Attacks",
     issuer: "IBM",
-    icon: "/placeholder.svg",
+    icon: "/IBMcert.PNG",
     certificateUrl: "https://coursera.org/share/b4be7d38d242a697d732524fa79ff94c",
     credentialId: "SP-CORE-54321",
   },
